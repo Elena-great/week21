@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <div>
+            Найти гифку:
+            <input type="text " id="gifName">
+            <button onclick="onSearch()">Go!</button>
+        </div>
+        <img id="out">
+        <script>
+            
+        let apiKey = "cWt92WFhvhWTMWBe0ZUnw7C4Z2fo2Wuz";
+    
+            function onSearch(){
+                let gifName = document.getElementById("gifName").value;
+                let url = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&limit=5&q=`+ gifName;
+            fetch(url)
+                .then(response => response.json())
+                .then(content =>  {
+                    console.log(content.data);
+                    document.getElementById('out').src = content.data[0].images.downsized.url;
+                    })         
+                .catch(error => console.log(error));
+                }
+        </script> 
+</body>
+</html>

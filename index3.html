@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="formElem">
+    <h1>Страница-опросник для владельцев кошек</h1>
+    <div>
+    <label for="name">Кличка питомца: </label>
+    <input type="text" id="name" required/>*
+</div>
+<div>
+    <label for="fio">Имя владельца:</label>
+    <input type="text" id="fio" required/>*
+</div>
+<div>
+    <label for="phone">Контакты владельца:</label>
+    <input type="tel" id="phone" minlength="10" maxlength="12"/>
+</div>
+<div> 
+<p>Порода питомца:</p>
+<select name="breed">
+<option value="1">Девон-рекс</option>
+<option value="2">Сиамская</option>
+<option value="3">Мейн-кун</option>
+<option value="4">Британская</option>
+<option value="5">Сибирская</option>
+<option value="6">Нет породы</option>
+</select>
+</div>
+<div>
+    <p>Чем питается питомец:</p> <br/>
+сухой корм <input type="checkbox" name="food" value="dryfood"/> влажный корм<input 
+type="checkbox" name="food" value="wetfood"/>  натуральный корм <input type="checkbox" name="food" value="naturalfood"/>
+</div>
+<div>
+    <p>Укажите пол питомца:</p> <br/>
+Самка <input type="radio" name="sex" value ="female" id="f"/> <br/> Самец<input 
+type="radio" name="sex" value ="male" id="m"/>
+</div>
+<div> <p>Комментарий:</p>  
+</div>
+<div> 
+<textarea rows="10" cols="50"></textarea>
+</div>
+
+<div> 
+    <p>Фото питомца:</p>
+    <input type="file">
+</div>
+
+<div>
+<button id="saveButton">Сохраниться</button>
+</div>
+</form>
+<script>
+
+saveButton.onclick = function (e) {
+            e.preventDefault();
+
+    fetch("https://httpbin.org/post",
+        {
+            method:'POST',
+            body: new FormData(formElem) 
+        })
+        .then(response => response.json())
+                .then(user =>  {
+                    console.log(user);})       
+                .catch(error => console.log(error));
+}
+</script>
+</body>
+</html>
